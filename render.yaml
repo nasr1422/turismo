@@ -1,0 +1,38 @@
+# render.yaml – Configuración de despliegue en Render
+# Documentación: https://render.com/docs/yaml-spec
+
+services:
+  # ── API FastAPI ──────────────────────────────────────────────────────────────
+  - type: web
+    name: turismo-api
+    runtime: python
+    buildCommand: pip install poetry && poetry install --no-dev
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        value: turismo_db
+      - key: ENVIRONMENT
+        value: production
+    healthCheckPath: /
+
+  # ── Frontend Reflex (Static Export) ─────────────────────────────────────────
+  - type: web
+    name: turismo-frontend
+    runtime: static
+    buildCommand: |
+      pip install poetry &&
+      poetry install &&
+      reflex export --frontend-only
+    staticPublishPath: ./frontend
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
