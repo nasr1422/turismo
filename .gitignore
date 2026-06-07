@@ -1,0 +1,48 @@
+.states
+assets/external/
+.web
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+
+# Entorno
+.env
+*.env.local
+
+# Reflex
+.web/
+.reflex/
+reflex.db
+
+# Base de datos
+*.sqlite
+*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Poetry
+poetry.lock
