@@ -36,10 +36,7 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 DB_NAME = os.getenv("DB_NAME", "turismo_db")
 
 DATABASE_URL = (
-    f"mssql+pyodbc://NASR\\SQLEXPRESS/{DB_NAME}"
-    f"?driver=ODBC+Driver+17+for+SQL+Server"
-    f"&trusted_connection=yes"
-    f"&TrustServerCertificate=yes"
+    f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True, echo=False)
